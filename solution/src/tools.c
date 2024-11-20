@@ -31,12 +31,16 @@ void prepare_command(char* buffer, char** command, char** args) {
     *args = strtok(NULL, "");
 }
 
-void string_from_string_arr(char* out_string, int arr_len, int start_index, char** arr){
-    out_string[0] = '\0';
+void string_from_string_arr(char* out_string, size_t out_size, int arr_len, int start_index, char** arr) {
+    out_string[0] = '\0'; // Начинаем с пустой строки
+
     for (int i = start_index; i < arr_len; i++) {
-        strcat(out_string, arr[i]);
+        size_t remaining_space = out_size - strlen(out_string) - 1; // Вычисляем оставшееся место с учётом терминального символа '\0'
+        strncat(out_string, arr[i], remaining_space); // Безопасно добавляем следующий элемент массива
+
         if (i < arr_len - 1) {
-            strcat(out_string, " ");
+            remaining_space = out_size - strlen(out_string) - 1; // Пересчитываем оставшееся место
+            strncat(out_string, " ", remaining_space); // Добавляем пробел, если это не последний элемент
         }
     }
 }

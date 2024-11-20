@@ -50,8 +50,3 @@ bool handle_command(const char* command, const char* args) {
     fflush(stdout);
     return true;
 }
-
-
-
-
-

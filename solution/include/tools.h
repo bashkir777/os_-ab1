@@ -12,6 +12,6 @@ enum OPERATION_STATUS get_env_var(const char *var_name, char **ret);
 
 void prepare_command(char* buffer, char** command, char** args);
 
-void string_from_string_arr(char* out_string, int arr_len, int start_index, char** arr);
+void string_from_string_arr(char* out_string, size_t out_size, int arr_len, int start_index, char** arr);
 
 #endif

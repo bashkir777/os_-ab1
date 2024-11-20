@@ -1,12 +1,13 @@
-#include <unistd.h>
 #include <stdint.h>
-#include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <unistd.h>
+
 #include "../include/built_in_commands.h"
 #include "../include/external_commands.h"
-#include "../include/tools.h"
 #include "../include/shell.h"
+#include "../include/tools.h"
 
 
 int main(int argc, char** argv) {
@@ -22,7 +23,7 @@ int main(int argc, char** argv) {
     if(shell_mode && argc == 2){
         start_shell(buffer);
     }else if(shell_mode){
-        string_from_string_arr(buffer, argc, 2, argv);
+        string_from_string_arr(buffer, BUFFER_SIZE, argc, 2, argv);
         single_command_execution(buffer);
     }
     
