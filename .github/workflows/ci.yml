@@ -30,4 +30,10 @@ jobs:
     - name: Build project
       run: |
         cd build
-        cmake --build . --config Debug --target all -j 18
+        cmake --build . --config Debug --target all -j 18\
+
+    - name: Run tests
+      run: |
+        cd tester
+        chmod +x entrypoint.sh
+        bash entrypoint.sh
