@@ -2,4 +2,12 @@
 #define EXTERNAL_COMMANDS_H
 
 bool handle_external_command(char* command, char* args);
+
+#define STACK_SIZE (1024 * 1024) // Размер стека для нового процесса
+
+struct clone_args {
+    char* command;
+    char* args;
+};
+
 #endif
