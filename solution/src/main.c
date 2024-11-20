@@ -9,26 +9,20 @@
 #include "../include/shell.h"
 
 
-
 int main(int argc, char** argv) {
     
     char buffer[BUFFER_SIZE];
 
-    if (argc < 2 ){
+    if (argc < 2){
         perror("Usage: shell 1 || shell 1 <command>");
     }
 
     bool shell_mode = strcmp(argv[1], "1") == 0;
+
     if(shell_mode && argc == 2){
         start_shell(buffer);
     }else if(shell_mode){
-        buffer[0] = '\0';
-        for (int i = 2; i < argc; i++) {
-            strcat(buffer, argv[i]);
-            if (i < argc - 1) {
-                strcat(buffer, " ");
-            }
-        }
+        string_from_string_arr(buffer, argc, 2, argv);
         single_command_execution(buffer);
     }
     

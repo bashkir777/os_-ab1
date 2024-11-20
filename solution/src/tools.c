@@ -30,3 +30,13 @@ void prepare_command(char* buffer, char** command, char** args) {
     *command = strtok(buffer, " ");
     *args = strtok(NULL, "");
 }
+
+void string_from_string_arr(char* out_string, int arr_len, int start_index, char** arr){
+    out_string[0] = '\0';
+    for (int i = start_index; i < arr_len; i++) {
+        strcat(out_string, arr[i]);
+        if (i < arr_len - 1) {
+            strcat(out_string, " ");
+        }
+    }
+}
