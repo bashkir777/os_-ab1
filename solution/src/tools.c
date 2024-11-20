@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <string.h>
+#include <time.h>
 #include "../include/tools.h"
 
 extern char **environ;
@@ -32,15 +33,20 @@ void prepare_command(char* buffer, char** command, char** args) {
 }
 
 void string_from_string_arr(char* out_string, size_t out_size, int arr_len, int start_index, char** arr) {
-    out_string[0] = '\0'; // Начинаем с пустой строки
+    out_string[0] = '\0';
 
     for (int i = start_index; i < arr_len; i++) {
-        size_t remaining_space = out_size - strlen(out_string) - 1; // Вычисляем оставшееся место с учётом терминального символа '\0'
-        strncat(out_string, arr[i], remaining_space); // Безопасно добавляем следующий элемент массива
+        size_t remaining_space = out_size - strlen(out_string) - 1;
+        strncat(out_string, arr[i], remaining_space);
 
         if (i < arr_len - 1) {
-            remaining_space = out_size - strlen(out_string) - 1; // Пересчитываем оставшееся место
-            strncat(out_string, " ", remaining_space); // Добавляем пробел, если это не последний элемент
+            remaining_space = out_size - strlen(out_string) - 1;
+            strncat(out_string, " ", remaining_space);
         }
     }
 }
+
+double calculate_time_diff(struct timespec start, struct timespec end) {
+    return (end.tv_sec - start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
+}
+

@@ -3,7 +3,7 @@
 echo "Assert built-in command 'ls' works correctly"
 
 expected_output=$(ls)
-actual_output=$("../build/solution/shell" 1 ls)
+actual_output=$("../build/solution/shell" 1 ls | grep -v "Execution time")
 
 if [ "$expected_output" = "$actual_output" ]; then
     echo "Test passed: 'ls' works correctly."

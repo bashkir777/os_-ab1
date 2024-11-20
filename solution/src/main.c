@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
 #include "../include/built_in_commands.h"
 #include "../include/external_commands.h"
@@ -19,6 +20,7 @@ int main(int argc, char** argv) {
     }
 
     bool shell_mode = strcmp(argv[1], "1") == 0;
+
 
     if(shell_mode && argc == 2){
         start_shell(buffer);

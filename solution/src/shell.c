@@ -1,8 +1,11 @@
+#define _POSIX_C_SOURCE 199309L
 #include <unistd.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
+
 #include "external_commands.h"
 #include "built_in_commands.h"
 #include "tools.h"
@@ -23,12 +26,21 @@ void single_command_execution(char* buffer){
     char* command = NULL;
     char* args = NULL;
 
+    struct timespec start_time, end_time;
+    clock_gettime(CLOCK_MONOTONIC, &start_time);
+
     prepare_command(buffer, &command, &args);
 
     bool command_is_built_in = handle_command(command, args);
+
     if (!command_is_built_in) {
         handle_external_command(command, args);
     }
+
+    clock_gettime(CLOCK_MONOTONIC, &end_time);
+    double elapsed_time = calculate_time_diff(start_time, end_time);
+    
+    printf("Execution time: %.6f seconds\n", elapsed_time);
     fflush(stdout);
 }
 

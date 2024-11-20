@@ -3,7 +3,7 @@
 echo "Assert built-in command 'echo' works correctly"
 
 expected_output="string"
-actual_output=$("../build/solution/shell" 1 echo "string")
+actual_output=$("../build/solution/shell" 1 echo "string" | grep -v "Execution time")
 
 if [ "$expected_output" = "$actual_output" ]; then
     echo "Test passed: 'echo' works correctly."
