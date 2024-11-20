@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "../../include/ema-search-int/tools.h"
+
 size_t parse_size(const char *size_str) {
     char *endptr;
     errno = 0;

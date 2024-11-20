@@ -17,6 +17,6 @@ int generate_array(size_t size, char* filename) {
     }
 
     fclose(file);
-    printf("Array generated and saved to %s\n", filename);
+    printf("Array generated and saved to file: %s\n", filename);
     return 0;
 }

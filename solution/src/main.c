@@ -13,7 +13,8 @@
 #include "../include/shell/tools.h"
 #include "../include/ema-search-int/array_generator.h"
 #include "../include/ema-search-int/tools.h"
-
+#include "../include/ema-search-int/linear_search.h"
+#include "../include/ema-search-int/ema_search_int.h"
 
 int main(int argc, char **argv) {
     char buffer[BUFFER_SIZE];
@@ -21,7 +22,7 @@ int main(int argc, char **argv) {
     if (argc < 2) {
         fprintf(stderr, "Usage:\n");
         fprintf(stderr, "  To use shell: shell 1 || shell 1 <command>\n");
-        fprintf(stderr, "  To use ema-search-int benchmark: shell 2 <iterations> <array size in bytes> <filename>\n");
+        fprintf(stderr, "  To use ema-search-int benchmark: shell 2 <iterations> <array size> <filename> <target>\n");
         exit(EXIT_FAILURE);
     }
 
@@ -35,14 +36,15 @@ int main(int argc, char **argv) {
         single_command_execution(buffer);
     }
 
-    if (ema_search_int_benchmark_mode && argc == 5) {
+    if (ema_search_int_benchmark_mode && argc == 6) {
         size_t array_size = parse_size(argv[3]);
+        int iterations = (int)parse_size(argv[2]);
+        int target = (int)parse_size(argv[5]);
         char *filename = argv[4];
-        generate_array(array_size, filename);
-        printf("Array of size %zu bytes generated and saved to %s\n", array_size, filename);
+        start_ema_search_int(iterations, array_size, filename, target);
     } else if (ema_search_int_benchmark_mode) {
         fprintf(stderr, "Invalid arguments for ema-search-int benchmark:\n");
-        fprintf(stderr, "Usage: shell 2 <iterations> <array size> <filename>\n");
+        fprintf(stderr, "Usage: shell 2 <iterations> <array size> <filename> <target>\n");
         exit(EXIT_FAILURE);
     }
 
