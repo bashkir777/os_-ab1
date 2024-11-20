@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../include/tools.h"
+#include "../../include/shell/tools.h"
 
 static void handle_echo(const char* args) {
     printf("%s\n", args);

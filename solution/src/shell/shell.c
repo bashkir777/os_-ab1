@@ -6,10 +6,10 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "external_commands.h"
-#include "built_in_commands.h"
-#include "tools.h"
-#define BUFFER_SIZE 1024
+#include "../../include/shell/external_commands.h"
+#include "../../include/shell/built_in_commands.h"
+#include "../../include/shell/tools.h"
+
 
 void read_command(char* buffer){
     ssize_t bytesRead = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);

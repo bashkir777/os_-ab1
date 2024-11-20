@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
-#include "../include/tools.h"
 
+#include "../../include/shell/tools.h"
 extern char **environ;
 
 enum OPERATION_STATUS get_env_var(const char *var_name, char **ret) {

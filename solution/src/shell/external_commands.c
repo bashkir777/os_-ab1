@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include "external_commands.h"
+#include "../../include/shell/external_commands.h"
 
 int child_function(void* arg) {
     struct clone_args* clone_arg = (struct clone_args*)arg;
