@@ -10,6 +10,6 @@ enum OPERATION_STATUS{
 
 enum OPERATION_STATUS get_env_var(const char *var_name, char **ret);
 
-void parse_input(char* buffer, char** command, char** args);
+void prepare_command(char* buffer, char** command, char** args);
 
 #endif
