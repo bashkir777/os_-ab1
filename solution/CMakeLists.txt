@@ -4,5 +4,5 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS
     include/*.h
 )
 
-add_executable(shell ${sources})
-target_include_directories(shell PRIVATE src include)
+add_executable(lab1 ${sources})
+target_include_directories(lab1 PRIVATE src include)

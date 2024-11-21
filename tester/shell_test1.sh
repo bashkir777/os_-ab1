@@ -3,7 +3,7 @@
 echo "Assert built-in command 'pwd' works correctly"
 
 expected_output=$(pwd)
-actual_output=$("../build/solution/shell" 1 pwd | grep -v "Execution time")
+actual_output=$("../build/solution/lab1" shell pwd | grep -v "Execution time")
 
 if [ "$expected_output" = "$actual_output" ]; then
     echo "Test passed: 'pwd' works correctly."
