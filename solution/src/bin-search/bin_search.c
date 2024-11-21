@@ -1,7 +1,11 @@
+#define _GNU_SOURCE
+#include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "../../include/bin-search/sorted_array_generator.h"
+#include "../../include/bin-search/sorted_array_generator.h"
+#include "../../include/shell/tools.h"
 
 int binary_search(const int *array, size_t size, int target) {
     size_t left = 0;
@@ -21,6 +25,11 @@ int binary_search(const int *array, size_t size, int target) {
 }
 
 void start_bin_search_benchmark(int array_size, int iterations, int target){
+    
+    struct timespec start_time, end_time;
+    clock_gettime(CLOCK_MONOTONIC, &start_time);
+
+
     int* in_memory_array = malloc(sizeof(int) * array_size);
     generate_sorted_array(in_memory_array, array_size);
     int position = -1;
@@ -32,6 +41,13 @@ void start_bin_search_benchmark(int array_size, int iterations, int target){
     } else {
         printf("Target has not been found.\n");
     }
+
+    clock_gettime(CLOCK_MONOTONIC, &end_time);
+    double elapsed_time = calculate_time_diff(start_time, end_time);
+    
+    printf("Execution time: %.6f seconds\n", elapsed_time);
+    fflush(stdout);
+
     free(in_memory_array);
 }
 
