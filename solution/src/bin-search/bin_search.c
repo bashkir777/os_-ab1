@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../../include/bin-search/sorted_array_generator.h"
-#include "../../include/bin-search/sorted_array_generator.h"
-#include "../../include/shell/tools.h"
+#include "bin-search/sorted_array_generator.h"
+#include "bin-search/sorted_array_generator.h"
+#include "shell/tools.h"
 
 int binary_search(const int *array, size_t size, int target) {
     size_t left = 0;

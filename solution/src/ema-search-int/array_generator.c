@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../../include/ema-search-int/array_generator.h"
+#include "ema-search-int/array_generator.h"
 
 int generate_array(size_t size, char* filename) {
     FILE *file = fopen(filename, "wb");

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "../../include/ema-search-int/linear_search.h"
+#include "ema-search-int/linear_search.h"
 
 int linear_search(const char *filename, int target) {
     FILE *file = fopen(filename, "rb");

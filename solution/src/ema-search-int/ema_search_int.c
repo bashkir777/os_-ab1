@@ -2,9 +2,9 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "../../include/ema-search-int/array_generator.h"
-#include "../../include/ema-search-int/linear_search.h"
-#include "../../include/shell/tools.h"
+#include "ema-search-int/array_generator.h"
+#include "ema-search-int/linear_search.h"
+#include "shell/tools.h"
 
 void start_ema_search_int(int iterations, size_t array_size, char *filename, int target) {
     struct timespec start_time, end_time;

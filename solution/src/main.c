@@ -7,16 +7,16 @@
 #include <time.h>
 #include <errno.h>
 
-#include "../include/shell/built_in_commands.h"
-#include "../include/shell/external_commands.h"
-#include "../include/shell/shell.h"
-#include "../include/shell/tools.h"
-#include "../include/ema-search-int/array_generator.h"
-#include "../include/ema-search-int/tools.h"
-#include "../include/ema-search-int/linear_search.h"
-#include "../include/ema-search-int/ema_search_int.h"
-#include "../include/bin-search/sorted_array_generator.h"
-#include "../include/bin-search/bin_search.h"
+#include "shell/built_in_commands.h"
+#include "shell/external_commands.h"
+#include "shell/shell.h"
+#include "shell/tools.h"
+#include "ema-search-int/array_generator.h"
+#include "ema-search-int/tools.h"
+#include "ema-search-int/linear_search.h"
+#include "ema-search-int/ema_search_int.h"
+#include "bin-search/sorted_array_generator.h"
+#include "bin-search/bin_search.h"
 
 int main(int argc, char **argv) {
     char buffer[BUFFER_SIZE];

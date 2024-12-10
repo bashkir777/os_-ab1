@@ -6,9 +6,9 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "../../include/shell/external_commands.h"
-#include "../../include/shell/built_in_commands.h"
-#include "../../include/shell/tools.h"
+#include "shell/external_commands.h"
+#include "shell/built_in_commands.h"
+#include "shell/tools.h"
 
 
 void read_command(char* buffer){
