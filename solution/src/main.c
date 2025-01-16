@@ -17,6 +17,7 @@
 #include "ema-search-int/ema_search_int.h"
 #include "bin-search/sorted_array_generator.h"
 #include "bin-search/bin_search.h"
+#include "combined-benchmark/combined.h"
 
 int main(int argc, char **argv) {
     char buffer[BUFFER_SIZE];
@@ -25,23 +26,26 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Usage:\n");
         fprintf(stderr, "  To use shell: lab1 shell || lab1 shell <command>\n");
         fprintf(stderr, "  To use ema-search-int benchmark: lab1 ema-search-int <iterations> <array size> <filename> <target>\n");
-        fprintf(stderr, "  To use multi threaded ema-search-int benchmark: lab1 ema-search-int-multi <iterations> <array size> <filename> <target> <threads_num>\n");
         fprintf(stderr, "  To use bin-search benchmark: lab1 bin-search <iterations> <array size> <target>\n");
-        fprintf(stderr, "  To use multi threaded bin-search benchmark: lab1 bin-search-multi <iterations> <array size> <target> <threads_num>\n");
+        fprintf(stderr, "  To use combined benchmark: lab1 combined-benchmark-sampl\n");
         exit(EXIT_FAILURE);
     }
 
     bool shell_mode = strcmp(argv[1], "shell") == 0;
     bool ema_search_int_benchmark_mode = strcmp(argv[1], "ema-search-int") == 0;
     bool bin_search_benchmark_mode = strcmp(argv[1], "bin-search") == 0;
-    bool ema_search_int_benchmark_multithread_mode = strcmp(argv[1], "ema-search-int-multi") == 0;
-    bool bin_search_benchmark_multithread_mode = strcmp(argv[1], "bin-search-multi") == 0;
+    bool combined_benchmark_mode = strcmp(argv[1], "combined-benchmark-sample") == 0;
+    
     
     if (shell_mode && argc == 2) {
         start_shell(buffer);
     } else if (shell_mode) {
         string_from_string_arr(buffer, BUFFER_SIZE, argc, 2, argv);
         single_command_execution(buffer);
+    }
+
+    if(combined_benchmark_mode && argc == 2){
+        start_combined_benchmark();
     }
 
     if (ema_search_int_benchmark_mode && argc == 6) {
@@ -55,30 +59,6 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Usage: lab1 ema-search-int <iterations> <array size> <filename> <target>\n");
         exit(EXIT_FAILURE);
     }
-
-    if(bin_search_benchmark_mode && argc == 5){
-        int array_size = (int) parse_size(argv[3]);
-        int iterations = (int)parse_size(argv[2]);
-        int target = (int) parse_size(argv[4]);
-        start_bin_search_benchmark(array_size, iterations, target);
-    }else if (bin_search_benchmark_mode) {
-        fprintf(stderr, "Invalid arguments for bin-search benchmark:\n");
-        fprintf(stderr, "Usage: lab1 bin-search <iterations> <array size> <target>\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if(bin_search_benchmark_multithread_mode && argc == 6){
-        int array_size = (int) parse_size(argv[3]);
-        int iterations = (int)parse_size(argv[2]);
-        int target = (int) parse_size(argv[4]);
-        int threadsNum = (int) parse_size(argv[5]);
-        start_bin_search_benchmark_multithreaded(array_size, iterations, target, threadsNum);
-    }else if (bin_search_benchmark_mode) {
-        fprintf(stderr, "Invalid arguments for bin-search-multi benchmark:\n");
-        fprintf(stderr, "Usage: lab1 bin-search-multi <iterations> <array size> <target> <threads_num>\n");
-        exit(EXIT_FAILURE);
-    }
-
-
+    
     return 0;
 }
