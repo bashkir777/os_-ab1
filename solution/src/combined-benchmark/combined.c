@@ -11,6 +11,9 @@
 #include "bin-search/sorted_array_generator.h"
 #include "bin-search/bin_search.h"
 #include "shell/tools.h"
+#include <fcntl.h>
+#include <mru_cache.h>
+#include <mru_api.h>
 
 void *start_bin_search_benchmark_thread(void *arg) {
     ThreadData *data = (ThreadData *)arg;
@@ -46,11 +49,27 @@ void *start_ema_search_int_thread(void *arg) {
     struct timespec start_time, end_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
 
+    // Генерируем массив и сохраняем его в файл
     generate_array(data->array_size, data->filename);
 
+    // Инициализируем кэш
+    int fd = open(data->filename, O_RDONLY);
+    if (fd == -1) {
+        perror("open");
+        return NULL;
+    }
+
+    MRUCache* cache = initialize_mru_cache(fd);
+    if (cache == NULL) {
+        perror("initialize_mru_cache");
+        close(fd);
+        return NULL;
+    }
+
+    // Выполняем поиск на каждой итерации
     int position = -1;
     for (int i = 0; i < data->iterations; i++) {
-        position = linear_search(data->filename, data->target);
+        position = linear_search(data->target, cache);
     }
 
     if (position != -1) {
@@ -58,6 +77,12 @@ void *start_ema_search_int_thread(void *arg) {
     } else {
         printf("EMA Search: Target has not been found.\n");
     }
+
+    // Закрываем кэш после завершения работы
+    if (close_mru_cache(cache, true) != CLOSE_CACHE_SUCCESS) {
+        perror("close_mru_cache");
+    }
+
     clock_gettime(CLOCK_MONOTONIC, &end_time);
     double elapsed_time = calculate_time_diff(start_time, end_time);
 
@@ -67,7 +92,7 @@ void *start_ema_search_int_thread(void *arg) {
     return NULL;
 }
 
-void start_combined_benchmark () {
+void start_combined_benchmark() {
     int bin_search_array_size = 200000;
     int bin_search_iterations = 300000000;
     int bin_search_target = 18;
@@ -84,7 +109,7 @@ void start_combined_benchmark () {
         .array_size = bin_search_array_size,
         .iterations = bin_search_iterations,
         .target = bin_search_target,
-        .filename = NULL
+        .filename = NULL  // Для bin-search имя файла не нужно
     };
 
     ThreadData ema_search_data = {
@@ -100,5 +125,4 @@ void start_combined_benchmark () {
 
     pthread_join(bin_search_thread, NULL);
     pthread_join(ema_search_thread, NULL);
-
 }
