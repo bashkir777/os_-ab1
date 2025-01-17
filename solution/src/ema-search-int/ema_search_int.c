@@ -13,10 +13,8 @@ void start_ema_search_int(int iterations, size_t array_size, char *filename, int
     struct timespec start_time, end_time;
     clock_gettime(CLOCK_MONOTONIC, &start_time);
 
-    // Генерируем массив и сохраняем его в файл
     generate_array(array_size, filename);
 
-    // Инициализируем кэш
     int fd = open(filename, O_RDONLY);
     if (fd == -1) {
         perror("open");
@@ -30,7 +28,6 @@ void start_ema_search_int(int iterations, size_t array_size, char *filename, int
         return;
     }
 
-    // Выполняем поиск на каждой итерации
     int position = -1;
     for (int i = 0; i < iterations; i++) {
         position = linear_search(target, cache);
