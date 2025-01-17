@@ -19,7 +19,7 @@ VOLUNTARY_CS=0
 # Функция для запуска нагрузчика
 run_load_tester() {
   local index=$1
-  local output=$(/usr/bin/time -v ../build/solution/lab1 ema-search-int 1 67108864 array$1 666 2>&1)
+  local output=$(/usr/bin/time -v ../build/solution/lab1 ema-search-int 10 67108864 array$1 666 2>&1)
 
   # Извлечение данных из вывода
   local system_time=$(echo "$output" | grep "System time" | awk '{print $4}')
